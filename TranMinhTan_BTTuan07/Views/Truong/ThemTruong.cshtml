@@ -1,0 +1,156 @@
+﻿@model TranMinhTan_BTTuan07.Models.MB_Truong
+@{
+    ViewBag.Title = "ThemTruong";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<link href="~/Content/bootstrap/css/CSS-PhanHe.css" rel="stylesheet" />
+<style>
+    form.submitted :invalid {
+        border: 1px solid red;
+    }
+</style>
+<div class="">
+
+    <div class="css-inp">
+        <i class="fa-solid fa-angles-right"></i>
+        <span style="margin-left:1%">THÊM TRƯỜNG - PHÂN HỆ</span>
+    </div>
+    <div style="padding-bottom: 1%; padding-top: 1%;">
+        @Html.ActionLink("< BACK", "Index", null, new { @class = "css-back" })
+    </div>
+
+    @using (Html.BeginForm("XuLyThemTruong", "Truong", FormMethod.Post, new { enctype = "multipart/form-data", id = "form1" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Thêm trường</legend>
+        <div style=" box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;">
+            <table class="table table-striped">
+                <tr>
+                    <td style="font-weight: 700;">
+                        Id
+                    </td>
+                    <td>
+                        <input type="number" name="Id" min="@ViewBag.min" required class="form-control" />
+                        @*@Html.TextBoxFor(model => model.Id, new { @class = "form-control", @required = "required" })
+                            @Html.ValidationMessageFor(model => model.Id)*@
+                    </td>
+                    <td style="font-weight: 700;">
+                        Mã Trường
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.MaTruong, new { @class = "form-control", @required = "required" })
+                        @Html.ValidationMessageFor(model => model.MaTruong)
+                    </td>
+                </tr>
+                <tr>
+                    <td style="font-weight: 700;">
+                        Tên Trường
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.TenTruong, new { @class = "form-control", @required = "required" })
+                        @Html.ValidationMessageFor(model => model.TenTruong)
+                    </td>
+                    <td style="font-weight: 700;">
+                        Hiển thị
+                    </td>
+                    <td colspan="3">
+                        @Html.RadioButtonFor(model => model.IsHienThi, "true", new { @required = "required" }) Yes
+                        @Html.RadioButtonFor(model => model.IsHienThi, "false", new { @required = "required" }) No
+                    </td>
+                </tr>
+                <tr>
+                    <td style="font-weight: 700;">
+                        Thông Tin Riêng
+                    </td>
+                    <td colspan="3">
+                        @Html.TextBoxFor(model => model.ThongTinRieng, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ThongTinRieng)
+                    </td>
+                </tr>
+                <tr>
+                    <td style="font-weight: 700;">
+                        Ghi chú
+                    </td>
+                    <td colspan="3">
+                        @Html.TextAreaFor(model => model.GhiChu, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.GhiChu)
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <input type="submit" id="submit1" value="Thêm" class="btn btn-danger " />
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </fieldset>
+    }
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Thêm phân hệ</legend>
+        <div>
+            @Html.Action("ThemTruongPhanHe", "Truong")
+        </div>
+    </fieldset>
+        <div>
+            <div>
+                @if (Session["Truong"] != null)
+                {
+                    @Html.Action("LoadThongTinTruong", "Truong")
+                }
+            </div>
+            <div>
+                @if (Session["Truong"] != null)
+                {
+                    <div>
+                        <h5 style="font-weight: 700;">DANH SÁCH PHÂN HỆ</h5>
+                    </div>
+                    <div>
+                        @Html.Action("LoadThongTinTruongPhanHe", "Truong")
+                    </div>
+                }
+            </div>
+        </div>
+</div>
+
+
+
+
+<script>
+    document.getElementById("submit1").addEventListener("click", function () {
+        document.getElementById("form1").className = "submitted";
+    });
+</script>
+
+
+@if (TempData["AlertMessageXoaTPH"] == "true")
+{
+    <script>
+        swal("Good job!", "Xóa thành công !", "success");
+    </script>
+}
+@if (TempData["AlertMessageThem"] != null)
+{
+    <script>
+        swal("Good job!", "Thêm thành công !", "success");
+    </script>
+}
+@if (TempData["AlertMessageErroTruong"] != null)
+{
+    <script>
+        swal("Warning!", "Chưa có thông tin Trường !", "warning");
+    </script>
+}
+
+@if (TempData["AlertMessageKTMa"] != null)
+{
+    <script type="text/javascript" charset="utf-8">
+        var msg = '@TempData["AlertMessageKTMa"]'
+        console.log(msg);
+        swal("Warning!", msg, "warning");
+    </script>
+
+}

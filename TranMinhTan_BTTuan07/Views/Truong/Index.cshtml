@@ -1,0 +1,174 @@
+﻿@model IEnumerable<TranMinhTan_BTTuan07.Models.MB_Truong>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+    var stt = 0;
+}
+<link href="~/Content/bootstrap/css/CSS-PhanHe.css" rel="stylesheet" />
+
+<div class="css-inp">
+    <i class="fa-solid fa-angles-right"></i>
+    <span style="margin-left:1%">QUẢN LÝ TRƯỜNG</span>
+</div>
+<div class=" css-list-ql">
+    <div style="width:100%; height:100%">
+        <div class="row">
+            <div class="col-md-3" style=" padding-bottom: 1%; padding-top: 1%; display: flex;">
+                @Html.ActionLink("THÊM TRƯỜNG", "ThemTruong", null, new { @class = "css-ins" })
+            </div>
+            @*<div class="col-md-5" style=" text-align: center;">
+
+                </div>*@
+        </div>
+        <div class="row">
+            <div style="overflow:auto" class="col-md-12">
+                <table class="table table-bordered table-striped table-responsive-stack table-hover " style="font-family: auto; text-align: center; ">
+                    <tr style=" background-color: #379ad2; color: white;">
+                        <th>
+                            STT
+                        </th>
+                        <th>
+                            ID
+                        </th>
+                        <th>
+                            MÃ TRƯỜNG
+                        </th>
+                        <th>
+                            TÊN TRƯỜNG
+                        </th>
+                        <th>
+                            HIỂN THỊ
+                        </th>
+                        <th>
+                            THÔNG TIN RIÊNG
+                        </th>
+                        <th>
+                            NGƯỜI TẠO
+                        </th>
+                        <th>
+                            NÀY TẠO
+                        </th>
+                        <th>
+                            NƯỜI CẬP NHẬT
+                        </th>
+                        <th>
+                            NGÀY CẬP NHẬT
+                        </th>
+                        <th>
+                            GHI CHÚ
+                        </th>
+                        <th>
+                            CHỨC NĂNG
+                        </th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        stt++;
+                        <tr>
+                            <td> @stt</td>
+                            <td style="text-align:left">
+                                @Html.DisplayFor(modelItem => item.Id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.MaTruong)
+                            </td>
+                            <td style="text-align:left">
+                                @Html.DisplayFor(modelItem => item.TenTruong)
+                            </td>
+                            <td>
+                                @Html.CheckBox("IsHienThi", item.IsHienThi)
+                            </td>
+                            <td style="text-align:left">
+                                @Html.DisplayFor(modelItem => item.ThongTinRieng)
+                            </td>
+                            <td style="text-align:left">
+                                @Html.DisplayFor(modelItem => item.NguoiTao)
+                            </td>
+                            <td>
+                                @string.Format("{0:dd-MM-yyyy}", item.NgayTao)
+                            </td>
+                            <td style="text-align:left">
+                                @Html.DisplayFor(modelItem => item.NguoiCapNhat)
+                            </td>
+                            <td>
+                                @string.Format("{0:dd-MM-yyyy}", item.NgayTao)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.GhiChu)
+                            </td>
+                            <td>
+                                <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#item-@item.Id" style="height: 30px; width: 40px; padding: 0px;">
+                                    <i class="fa-solid fa-circle-info"></i>
+                                </button>
+                                @Html.ActionLink(" ", "SuaTruong", new { id = item.Id }, new { @class = "btn btn-success fa-solid fa-pencil" })
+                                @Html.ActionLink(" ", "XoaTruong", new { id = item.Id }, new { @class = "btn btn-danger fa-solid fa-trash-can" })
+                            </td>
+                        </tr>
+                    }
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@foreach (var item in Model)
+{
+
+    <input name="CodeId" type="hidden" value="@item.Id">
+    <div class="modal fade" id="item-@item.Id" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document" style="float: right; margin-right: 105px;">
+            <div class="modal-content" style="width: 1250px; margin-left: -775px; ">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalLongTitle">TRƯỜNG - PHÂN HỆ</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @Html.Action("LoadThongTinChiTietTruong", "Truong", new { id = @item.Id })
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+
+
+@if (TempData["AlertMessageThem"] != null)
+{
+    <script>
+        swal("Good job!", "Thêm thành công !", "success");
+    </script>
+}
+
+@if (TempData["AlertMessageXoa"] == "true")
+{
+    <script>
+        swal("Good job!", "Xóa thành công !", "success");
+    </script>
+}
+else if (TempData["AlertMessageXoa"] == "false")
+{
+    <script>
+        swal("Oops", "Không thể xóa !", "error");
+    </script>
+}
+@if (TempData["AlertMessageSua"] != null)
+{
+    <script>
+        swal("Good job!", "Sửa thành công !", "success");
+    </script>
+}
+@if (TempData["AlertMessageXoaTPH"] == "true")
+{
+    <script>
+        swal("Good job!", "Xóa thành công !", "success");
+    </script>
+}

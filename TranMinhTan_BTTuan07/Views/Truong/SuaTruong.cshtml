@@ -1,0 +1,84 @@
+﻿@model TranMinhTan_BTTuan07.Models.MB_Truong
+
+@{
+    ViewBag.Title = "SuaTruong";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<link href="~/Content/bootstrap/css/CSS-PhanHe.css" rel="stylesheet" />
+<style>
+    form.submitted :invalid {
+        border: 1px solid red;
+    }
+</style>
+<div class="">
+    <div class="css-inp">
+        <i class="fa-solid fa-angles-right"></i>
+        <span style="margin-left:1%">SỬA TRƯỜNG</span>
+    </div>
+    <div style="padding-bottom: 1%; padding-top: 1%">
+        @Html.ActionLink("< BACK", "Index", null, new { @class = "css-back" })
+    </div>
+    @using (Html.BeginForm("XuLySuaTruong", "Truong", FormMethod.Post, new { enctype = "multipart/form-data", id = "form1" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.Id)
+        <div style=" box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;">
+            <table class="table table-striped">
+                <tr>
+                    <td style="font-weight: 700;">
+                        Mã Trường
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.MaTruong, new { @class = "form-control", @required = "required" })
+                        @Html.ValidationMessageFor(model => model.MaTruong)
+                    </td>
+                    <td style="font-weight: 700;">
+                        Tên Trường
+                    </td>
+                    <td colspan="2">
+                        @Html.TextBoxFor(model => model.TenTruong, new { @class = "form-control", @required = "required" })
+                        @Html.ValidationMessageFor(model => model.TenTruong)
+                    </td>
+                </tr>
+                <tr>
+                    <td style="font-weight: 700;">
+                        Thông Tin Riêng
+                    </td>
+                    <td colspan="4">
+                        @Html.TextAreaFor(model => model.ThongTinRieng, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ThongTinRieng)
+                    </td>
+                </tr>
+                <tr>
+                    <td style="font-weight: 700;">
+                        Ghi Chú
+                    </td>
+                    <td colspan="4">
+                        @Html.TextAreaFor(model => model.GhiChu, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.GhiChu)
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <input type="submit" id="submit1" value="Lưu" class="btn btn-danger " />
+                    </td>
+                </tr>
+            </table>
+        </div>
+    }
+</div>
+
+<script>
+    document.getElementById("submit1").addEventListener("click", function () {
+        document.getElementById("form1").className = "submitted";
+    });
+</script>
+
+
+
+
+
+
+

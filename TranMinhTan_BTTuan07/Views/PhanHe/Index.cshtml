@@ -1,0 +1,134 @@
+﻿@model IEnumerable<TranMinhTan_BTTuan07.Models.MB_PhanHe>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+    var stt = 0;
+}
+<link href="~/Content/bootstrap/css/CSS-PhanHe.css" rel="stylesheet" />
+<div class="css-inp">
+    <i class="fa-solid fa-angles-right"></i>
+    <span style="margin-left:1%">QUẢN LÝ PHÂN HỆ</span>
+</div>
+<div class=" css-list-ql">
+    <div style="width:100%; height:100%">
+        <div class="row">
+            <div class="col-md-3" style=" padding-bottom: 1%;padding-top: 1%; display: flex">
+                @Html.ActionLink("THÊM PHÂN HỆ", "ThemPhanHe", null, new { @class = "css-ins" })
+            </div>
+            @*<div class="col-md-5" style=" text-align: center;">
+
+                </div>*@
+        </div>
+        <div class="row" style="width:100%">
+            <div style="overflow:auto" class="col-md-12">
+                <table class="table table-bordered table-striped table-responsive-stack table-hover " style="font-family: auto; text-align: center; ">
+                    <tr style=" background-color: #379ad2; color: white;">
+                        <th>
+                            STT
+                        </th>
+                        <th>
+                            ID
+                        </th>
+                        <th>
+                            MÃ PHÂN HỆ
+                        </th>
+                        <th>
+                            TÊN PHÂN HỆ
+                        </th>
+                        <th>
+                            HIỂN THỊ
+                        </th>
+                        <th>
+                            NGƯỜI TẠO
+                        </th>
+                        <th>
+                            NÀY TẠO
+                        </th>
+                        <th>
+                            NƯỜI CẬP NHẬT
+                        </th>
+                        <th>
+                           NGÀY CẬP NHẬT
+                        </th>
+                        <th>
+                           GHI CHÚ
+                        </th>
+                        <th>
+                            CHỨC NĂNG
+                        </th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        stt++;
+                        <tr>
+                            <td> @stt</td>
+                            <td style="text-align:left">
+                                @Html.DisplayFor(modelItem => item.Id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.MaPhanHe)
+                            </td>
+                            <td style ="text-align:left">
+                                @Html.DisplayFor(modelItem => item.TenPhanHe)
+                            </td>
+                            <td >
+                                @Html.CheckBox("IsHienThi", item.IsHienThi.GetValueOrDefault(false))
+                            </td>
+                            <td style="text-align:left">
+                                @Html.DisplayFor(modelItem => item.NguoiTao)
+                            </td>
+                            <td >
+                                @string.Format("{0:dd-MM-yyyy}", item.NgayTao)
+                            </td>
+                            <td style="text-align:left">
+                                @Html.DisplayFor(modelItem => item.NguoiCapNhat)
+                            </td>
+                            <td >
+                                @string.Format("{0:dd-MM-yyyy}", item.NgayTao)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.GhiChu)
+                            </td>
+                            <td>
+                                @Html.ActionLink(" ", "SuaPhanHe", new { id = item.Id }, new { @class = "btn btn-success fa-solid fa-pencil" })
+                                @Html.ActionLink(" ", "XoaPhanHe", new { id = item.Id }, new { @class = "btn btn-danger fa-solid fa-trash-can" })
+                            </td>
+                        </tr>
+
+                    }
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (TempData["AlertMessageThem"] != null)
+{
+    <script>
+        swal("Good job!", "Thêm thành công !", "success");
+    </script>
+}
+
+@if (TempData["AlertMessageXoa"] == "true")
+{
+    <script>
+        swal("Good job!", "Xóa thành công !", "success");
+    </script>
+}
+else if (TempData["AlertMessageXoa"] == "false")
+{
+    <script>
+        swal("Oops", "Không thể xóa !", "error");
+    </script>
+}
+@if (TempData["AlertMessageSua"] != null)
+{
+    <script>
+        swal("Good job!", "Sửa thành công !", "success");
+    </script>
+}
+
+

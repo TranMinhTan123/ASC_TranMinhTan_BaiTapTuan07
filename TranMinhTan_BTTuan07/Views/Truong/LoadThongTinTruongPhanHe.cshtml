@@ -1,0 +1,42 @@
+﻿@model IEnumerable<TranMinhTan_BTTuan07.Models.sp_LoadDSTruongPhanHe_PhanHeResult>
+
+@{
+    ViewBag.Title = "LoadThongTinTruongPhanHe";
+}
+
+
+<table class="table table-bordered table-striped table-responsive-stack table-hover">
+    <tr style=" background-color: #4ab66d; color: white;">
+        <th>ID Trường</th>
+        <th>Tên Phân Hệ</th>
+        <th>Ngày Tạo</th>
+        <th>Ngày Cập Nhật</th>
+        <th> Ghi Chú</th>
+        <th> Trạng Thái</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDTruong)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenPhanHe) 
+            </td>
+            <td>
+                @string.Format("{0:dd-MM-yyyy}", item.NgayTao)
+            </td>
+            <td>
+                @string.Format("{0:dd-MM-yyyy}", item.NgayCapNhat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GhiChu)
+            </td>
+            <td style="text-align:center">
+                @Html.ActionLink(" ", "XoaTruongPhanHe", new { id = item.Id}, new { @class = "btn btn-danger fa-solid fa-trash-can" })
+            </td>
+        </tr>
+    }
+
+</table>

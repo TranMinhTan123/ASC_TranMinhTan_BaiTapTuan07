@@ -1,0 +1,22 @@
+﻿@model IEnumerable<TranMinhTan_BTTuan07.Models.MB_Truong>
+
+@{
+    ViewBag.Title = "LoadThongTinTruong";
+}
+
+<table class="table table-bordered table-striped table-responsive-stack table-hover">
+    @foreach (var item in Model)
+    {
+        <tr style="font-weight: bold; background-color: #4ab66d; color: white; font-size: 16px;">
+            <td>
+                Mã Trường:
+                @Html.DisplayFor(modelItem => item.MaTruong)
+            </td>
+            <td>
+                Tên Trường:
+                @Html.DisplayFor(modelItem => item.TenTruong)
+            </td>
+        </tr>
+    }
+
+</table>

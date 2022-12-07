@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="THIETLAPCAUHINH" Class="ThietLapCauHinhDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=DESKTOP-7RNKS49;Initial Catalog=THIETLAPCAUHINH;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="THIETLAPCAUHINHConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.MB_PhanHe" Member="MB_PhanHes">
+    <Type Name="MB_PhanHe">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MaPhanHe" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="TenPhanHe" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="GhiChu" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="IsHienThi" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="NguoiTao" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NgayTao" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="NguoiCapNhat" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NgayCapNhat" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MB_Truong_PhanHe" Member="MB_Truong_PhanHes">
+    <Type Name="MB_Truong_PhanHe">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IDTruong" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IDPhanHe" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Url" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="Url_2" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="Url_3" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="UrlSocket" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="SubAPI" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="SubAPI_2" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="SubAPI_3" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="GhiChu" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="Warning_RequireSurvey" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="FeaturesRequireSurvey" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="NguoiTao" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NgayTao" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="NguoiCapNhat" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NgayCapNhat" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="VersionEgovAPI" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="UrlPayment" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="VersionStudentAPI" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="WarningMessage" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="HasAds" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="WebsiteUrl" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="VersionWeb" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="UseHTMLSalaryView" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MB_Truong" Member="MB_Truongs">
+    <Type Name="MB_Truong">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MaTruong" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="TenTruong" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="TruocThuocBo" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="DuongDanLogo" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="IsHienThi" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsSuDungRieng" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="ThongTinRieng" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="GhiChu" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="Loai" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NguoiTao" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NgayTao" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="NguoiCapNhat" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NgayCapNhat" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.sp_LoadDSTruongPhanHe_PhanHe" Method="sp_LoadDSTruongPhanHe_PhanHe">
+    <ElementType Name="sp_LoadDSTruongPhanHe_PhanHeResult">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IDPhanHe" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IDTruong" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TenPhanHe" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="NgayTao" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="NgayCapNhat" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="GhiChu" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+</Database>
